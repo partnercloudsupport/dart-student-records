@@ -65,7 +65,7 @@ abstract class MongoRepository<T extends Entity> implements Repository<T> {
 
       var collection = db.collection(collectionName);
 
-      await iterable.map((value) => value.toJson()).forEach((value) async {
+      await iterable.map((value) => value.toMap()).forEach((value) async {
         await collection.save(value);
       });
     } finally {
@@ -98,7 +98,7 @@ abstract class MongoRepository<T extends Entity> implements Repository<T> {
 
       var collection = db.collection(collectionName);
 
-      await collection.save(value.toJson());
+      await collection.save(value.toMap());
     } finally {
       await db.close();
     }
@@ -119,7 +119,7 @@ class MongoStudentRepository extends MongoRepository<StudentEntity> {
 
       return await collection
           .find(specification?.toSelector())
-          .map((json) => StudentEntity.fromJson(json))
+          .map((json) => StudentEntity.fromMap(json))
           .toList();
     } finally {
       await db.close();

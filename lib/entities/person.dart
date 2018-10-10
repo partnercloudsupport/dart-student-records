@@ -14,21 +14,19 @@ class PersonEntity extends Entity {
     this.phoneNumber,
   ) : super(personId);
 
-  PersonEntity.fromJson(Map<String, dynamic> json)
-      : firstName = json['firstName'] as String,
-        lastName = json['lastName'] as String,
-        dateOfBirth = json['dateOfBirth'] == null
-            ? null
-            : DateTime.parse(json['dateOfBirth'] as String),
-        phoneNumber = json['phoneNumber'] as String,
-        super.fromJson(json);
+  PersonEntity.fromMap(Map<String, dynamic> map)
+      : firstName = map['firstName'] as String,
+        lastName = map['lastName'] as String,
+        dateOfBirth = map['dateOfBirth'] as DateTime,
+        phoneNumber = map['phoneNumber'] as String,
+        super.fromMap(map);
 
-  Map<String, dynamic> toJson() {
+  Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'firstName': firstName,
       'lastName': lastName,
-      'dateOfBirth': dateOfBirth?.toIso8601String(),
+      'dateOfBirth': dateOfBirth,
       'phoneNumber': phoneNumber
-    }..addAll(super.toJson());
+    }..addAll(super.toMap());
   }
 }

@@ -83,7 +83,7 @@ Future<void> readStudents() async {
 
   if (students.length > 0) {
     students.forEach((student) {
-      stdout.writeln('${student.toJson()}');
+      stdout.writeln('${student.toMap()}');
     });
   } else {
     stdout.writeln('No Students Found!');
